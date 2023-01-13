@@ -1,11 +1,17 @@
 
+/*importar modulos*/
+import Formulario from "./components/Formulario"
+import Header from "./components/Header"
+
+
 /*Funcion creadora de la aplicación */ 
 function App() {
   
   return (
     /*Etiqueta padre y el body de la página*/
     <> 
-      
+      <Header />
+      <Formulario />
     </>
     
   )
