@@ -2,6 +2,7 @@
 /*importar modulos*/
 import Formulario from "./components/Formulario"
 import Header from "./components/Header"
+import ListadoPaciente from "./components/ListadoPaciente"
 
 
 /*Funcion creadora de la aplicación */ 
@@ -12,7 +13,9 @@ function App() {
     <> 
       <Header />
       <Formulario />
+      <ListadoPaciente />
     </>
+    
     
   )
 }
