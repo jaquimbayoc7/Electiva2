@@ -1,5 +1,13 @@
+import { useState, useEffect } from "react";
+
 
 const Formulario = () => {
+  const [nombre, setNombre] = useState('');
+
+  //setNombre('Trosky')
+
+  //console.log(nombre);
+
   return (
   <div className="md:w-1/2 lg:w-2/5">
     <h2 className="font-black text-3xl text-center">
@@ -17,7 +25,8 @@ const Formulario = () => {
 
         <input id="mascota" type="text" className="border-2 
         w-full p-2 mt-2 placeholder-gray-400 rounded-md" 
-        placeholder="Nombre de la mascota"/>
+        placeholder="Nombre de la mascota"
+        value={nombre} onChange={(e)=>console.log(setNombre(e.target.value))}/>
       </div>
 
       <div className="mb-5">
