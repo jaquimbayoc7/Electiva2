@@ -3,13 +3,33 @@ import { useState, useEffect } from "react";
 
 const Formulario = () => {
   const [nombre, setNombre] = useState('');
+  const [propietario, setPropietario] = useState('');
+  const [email, setEmail] = useState('');
+  const [fingreso, setFingreso] = useState('');
+  const [sintomas, setSintomas] = useState('');
 
-  //setNombre('Trosky')
+  //Hook para capturar errores
+  const[error, setError] = useState(false);
 
-  //console.log(nombre);
+  //Limpiar o resetear el formulario cuando carga la página
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    
+    //Validar formulario que no vaya con campos vacíos
+  if([nombre, propietario, email, fingreso, sintomas].includes('')){
+    
+    setError(true);
+    return;
+  }
+
+  setError(false);
+  }
+
+  
+  
 
   return (
-  <div className="md:w-1/2 lg:w-2/5">
+  <div className="md:w-1/2 lg:w-2/5 mx-5">
     <h2 className="font-black text-3xl text-center">
       Seguimiento a Pacientes
     </h2>
@@ -18,7 +38,16 @@ const Formulario = () => {
       <span className="text-indigo-600 font-bold">Administralos</span>
     </p>
 
-    <form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
+    <form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10" onSubmit={handleSubmit}>
+      {error && (
+      <div className="bg-red-800 text-white 
+      p-3 uppercase text-center font-bold 
+      rounded-md">
+        <p>
+          Todos los campos son Obligatorios!
+        </p>
+      </div>)
+      }
       <div className="mb-5">
         <label htmlFor="mascota" className="block text-gray-700 
         uppercase font-bold">Nombre Mascota:</label>
@@ -26,7 +55,7 @@ const Formulario = () => {
         <input id="mascota" type="text" className="border-2 
         w-full p-2 mt-2 placeholder-gray-400 rounded-md" 
         placeholder="Nombre de la mascota"
-        value={nombre} onChange={(e)=>console.log(setNombre(e.target.value))}/>
+        value={nombre} onChange={(e)=>setNombre(e.target.value)}/>
       </div>
 
       <div className="mb-5">
@@ -37,7 +66,8 @@ const Formulario = () => {
         <input id="propietario" type="text" 
         className="border-2 w-full p-2 mt-2
          placeholder-gray-400 rounded-md"
-          placeholder="Nombre del propietario"/>
+          placeholder="Nombre del propietario"
+          value={propietario} onChange={(e)=>setPropietario(e.target.value)}/>
       </div>
 
       <div className="mb-5">
@@ -48,7 +78,8 @@ const Formulario = () => {
         <input id="email" type="email" 
         className="border-2 w-full p-2 mt-2
          placeholder-gray-400 rounded-md" 
-         placeholder="Email Propietario"/>
+         placeholder="Email Propietario"
+         value={email} onChange={(e)=>setEmail(e.target.value)}/>
       </div>
 
       <div className="mb-5">
@@ -59,6 +90,7 @@ const Formulario = () => {
         <input id="fecha" type="date" 
         className="border-2 w-full p-2 mt-2
           rounded-md" 
+          value={fingreso} onChange={(e)=>setFingreso(e.target.value)}
          />
       </div>
 
@@ -70,6 +102,7 @@ const Formulario = () => {
         <textarea id="sintomas"  
         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
         placeholder="Describe los síntomas" 
+        value={sintomas} onChange={(e)=>setSintomas(e.target.value)}
          />
       </div>
 
