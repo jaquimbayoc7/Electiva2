@@ -21,7 +21,13 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
 
   //Revisión del cargue de datos en el form
   useEffect(()=>{
-    console.log(paciente);
+    if(Object.keys(paciente).length > 0){
+      setNombre(paciente.nombre)
+      setEmail(paciente.email)
+      setPropietario(paciente.propietario)
+      setFingreso(paciente.fingreso)
+      setSintomas(paciente.sintomas)
+    }
   }, [paciente])
   
 
@@ -44,8 +50,16 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
     propietario, 
     email, 
     fingreso, 
-    sintomas,
-    id: generarID()
+    sintomas
+    
+  }
+
+  //Proceso de actualización
+  if(paciente.id){
+    //console.log('Editando')
+  }else{
+    //console.log('Agregando mascota')
+    objetoPaciente.id = generarID();
   }
 
   //console.log(objetoPaciente);
@@ -139,7 +153,7 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
          />
       </div>
 
-      <input type="submit" value="Agregar Mascota" 
+      <input type="submit" value={paciente.id ? "Editar Mascota":"Agregar Mascota"}
       className="bg-indigo-600 w-full 
       p-3 text-white uppercase font-bold
        hover:bg-indigo-800 cursor-pointer transition-colors" />
