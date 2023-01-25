@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Formulario = ({pacientes, setPacientes, paciente}) => {
+const Formulario = ({pacientes, setPacientes, paciente, setPaciente}) => {
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
@@ -57,14 +57,27 @@ const Formulario = ({pacientes, setPacientes, paciente}) => {
   //Proceso de actualización
   if(paciente.id){
     //console.log('Editando')
+    objetoPaciente.id = paciente.id
+    //console.log(objetoPaciente)
+    //console.log(paciente)
+    const pacienteActualizado = pacientes.map(
+      pacienteState =>pacienteState.id === paciente.id ?
+      objetoPaciente: pacienteState
+    )
+
+    setPacientes(pacienteActualizado)
+    setPaciente({})
+
   }else{
     //console.log('Agregando mascota')
     objetoPaciente.id = generarID();
+    setPacientes([...pacientes, objetoPaciente])
+    //console.log(objetoPaciente)
   }
 
   //console.log(objetoPaciente);
 
-  setPacientes([...pacientes, objetoPaciente])
+  
 
   //Limpieza de hooks - useState de cada uno
   setNombre('')
